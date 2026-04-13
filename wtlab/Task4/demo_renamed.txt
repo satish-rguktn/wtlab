@@ -1,0 +1,2 @@
+Hello satish is PHP File Handling Demo.
+New Line Added.
