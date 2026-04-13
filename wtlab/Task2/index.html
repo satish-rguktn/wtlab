@@ -1,835 +1,213 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Satish Shop | E-Commerce</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #f0f2f5;
-            color: #333;
-        }
-
-        /* ─── NAVBAR ─── */
-        header {
-            background: linear-gradient(135deg, #1a1a2e, #0f3460);
-            padding: 0 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            font-size: 26px;
-        }
-
-        .logo h1 {
-            font-size: 22px;
-            color: #38ef7d;
-            letter-spacing: 2px;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        nav a {
-            color: rgba(255,255,255,0.85);
-            text-decoration: none;
-            font-size: 14px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-
-        nav a:hover {
-            background: rgba(255,255,255,0.1);
-            color: #38ef7d;
-        }
-
-        nav a.btn-login {
-            background: linear-gradient(135deg, #e94560, #c0392b);
-            color: white;
-            font-weight: bold;
-        }
-
-        nav a.btn-login:hover {
-            opacity: 0.85;
-            background: linear-gradient(135deg, #e94560, #c0392b);
-        }
-
-        /* Search Bar */
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background: rgba(255,255,255,0.1);
-            border-radius: 25px;
-            padding: 6px 16px;
-            gap: 8px;
-        }
-
-        .search-bar input {
-            background: none;
-            border: none;
-            outline: none;
-            color: white;
-            font-size: 13px;
-            width: 180px;
-        }
-
-        .search-bar input::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-
-        .search-bar span {
-            color: rgba(255,255,255,0.5);
-            font-size: 14px;
-        }
-
-        /* ─── HERO ─── */
-        .hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 50%, #e94560 100%);
-            padding: 80px 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 380px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: rgba(56, 239, 125, 0.05);
-            border-radius: 50%;
-            right: -100px;
-            top: -100px;
-        }
-
-        .hero-content {
-            max-width: 550px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(56, 239, 125, 0.15);
-            color: #38ef7d;
-            border: 1px solid #38ef7d;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
-        .hero h2 {
-            font-size: 44px;
-            color: white;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
-
-        .hero h2 span {
-            color: #38ef7d;
-        }
-
-        .hero p {
-            font-size: 16px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn-shop {
-            padding: 14px 30px;
-            background: linear-gradient(135deg, #38ef7d, #11998e);
-            color: #1a1a2e;
-            font-size: 15px;
-            font-weight: bold;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn-shop:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(56, 239, 125, 0.4);
-        }
-
-        .btn-explore {
-            padding: 14px 30px;
-            background: transparent;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            border: 2px solid rgba(255,255,255,0.4);
-            border-radius: 30px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-explore:hover {
-            border-color: white;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat h3 {
-            font-size: 22px;
-            color: #38ef7d;
-        }
-
-        .stat p {
-            font-size: 12px;
-            color: rgba(255,255,255,0.6);
-            margin: 0;
-        }
-
-        .hero-emoji {
-            font-size: 160px;
-            opacity: 0.15;
-            position: absolute;
-            right: 80px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        /* ─── CATEGORIES ─── */
-        .categories {
-            padding: 50px;
-            background: white;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .section-title h2 {
-            font-size: 28px;
-            color: #1a1a2e;
-            margin-bottom: 8px;
-        }
-
-        .section-title p {
-            color: #888;
-            font-size: 14px;
-        }
-
-        .category-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .category-card {
-            background: linear-gradient(135deg, #f0f2f5, #e8eaf0);
-            border-radius: 15px;
-            padding: 25px 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            min-width: 130px;
-            border: 2px solid transparent;
-        }
-
-        .category-card:hover {
-            background: linear-gradient(135deg, #1a1a2e, #0f3460);
-            color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border-color: #38ef7d;
-        }
-
-        .category-card .icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .category-card p {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .category-card:hover p {
-            color: white;
-        }
-
-        /* ─── BANNER ─── */
-        .promo-banner {
-            margin: 0 50px 50px;
-            background: linear-gradient(135deg, #e94560, #c0392b);
-            border-radius: 20px;
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
-
-        .promo-banner h3 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .promo-banner p {
-            font-size: 14px;
-            opacity: 0.85;
-        }
-
-        .promo-banner .btn-promo {
-            background: white;
-            color: #e94560;
-            padding: 12px 28px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 14px;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: transform 0.2s;
-        }
-
-        .promo-banner .btn-promo:hover {
-            transform: scale(1.05);
-        }
-
-        /* ─── PRODUCTS ─── */
-        .products {
-            padding: 20px 50px 60px;
-        }
-
-        .products-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .products-header h2 {
-            font-size: 26px;
-            color: #1a1a2e;
-        }
-
-        .view-all {
-            color: #e94560;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #e94560;
-            color: white;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 12px;
-            z-index: 2;
-        }
-
-        .wishlist {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: white;
-            border: none;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-            z-index: 2;
-        }
-
-        .wishlist:hover {
-            transform: scale(1.15);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: linear-gradient(135deg, #f0f2f5, #dde1e8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 70px;
-        }
-
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .card-body {
-            padding: 16px;
-        }
-
-        .card h3 {
-            font-size: 15px;
-            color: #1a1a2e;
-            margin-bottom: 5px;
-        }
-
-        .stars {
-            color: #f39c12;
-            font-size: 12px;
-            margin-bottom: 8px;
-        }
-
-        .stars span {
-            color: #888;
-            font-size: 11px;
-            margin-left: 4px;
-        }
-
-        .price-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-        }
-
-        .price {
-            font-size: 18px;
-            font-weight: bold;
-            color: #e94560;
-        }
-
-        .old-price {
-            font-size: 12px;
-            color: #aaa;
-            text-decoration: line-through;
-            margin-left: 6px;
-        }
-
-        .discount {
-            font-size: 11px;
-            color: #27ae60;
-            font-weight: bold;
-        }
-
-        .btn-cart {
-            width: 100%;
-            padding: 10px;
-            background: linear-gradient(135deg, #1a1a2e, #0f3460);
-            color: white;
-            font-size: 13px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-cart:hover {
-            background: linear-gradient(135deg, #e94560, #c0392b);
-        }
-
-        /* ─── FEATURES ─── */
-        .features-bar {
-            background: linear-gradient(135deg, #1a1a2e, #0f3460);
-            padding: 40px 50px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: white;
-        }
-
-        .feature-item .icon {
-            font-size: 32px;
-        }
-
-        .feature-item h4 {
-            font-size: 14px;
-            color: #38ef7d;
-            margin-bottom: 3px;
-        }
-
-        .feature-item p {
-            font-size: 12px;
-            color: rgba(255,255,255,0.6);
-        }
-
-        /* ─── FOOTER ─── */
-        footer {
-            background: #0d0d1a;
-            color: rgba(255,255,255,0.6);
-            padding: 40px 50px 20px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .footer-col h4 {
-            color: #38ef7d;
-            font-size: 14px;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .footer-col a {
-            display: block;
-            color: rgba(255,255,255,0.5);
-            text-decoration: none;
-            font-size: 13px;
-            margin-bottom: 8px;
-            transition: color 0.2s;
-        }
-
-        .footer-col a:hover {
-            color: #38ef7d;
-        }
-
-        .footer-col p {
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-        }
-
-        .footer-logo {
-            color: #38ef7d;
-            font-size: 18px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        .payment-icons {
-            display: flex;
-            gap: 10px;
-            font-size: 20px;
-        }
-    </style>
+<title>Satish Shop | E-Commerce</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial;background:#f0f2f5;color:#333;}
+
+/* NAVBAR */
+header{
+background:linear-gradient(135deg,#1a1a2e,#0f3460);
+padding:0 50px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+height:70px;
+position:sticky;top:0;z-index:100;
+}
+.logo{display:flex;gap:10px;align-items:center;}
+.logo h1{color:#38ef7d;}
+nav a{color:white;text-decoration:none;margin:0 8px;}
+.btn-login{background:#e94560;padding:6px 12px;border-radius:20px;}
+
+.search-bar{
+background:rgba(255,255,255,0.1);
+padding:5px 10px;border-radius:20px;
+}
+.search-bar input{
+background:none;border:none;color:white;outline:none;
+}
+
+/* HERO */
+.hero{
+padding:60px;
+background:linear-gradient(135deg,#1a1a2e,#e94560);
+color:white;
+}
+.btn-shop{background:#38ef7d;padding:10px 20px;border-radius:20px;text-decoration:none;}
+
+/* CATEGORY */
+.categories{padding:40px;background:white;}
+.category-grid{display:flex;gap:15px;flex-wrap:wrap;}
+.category-card{
+padding:20px;background:#eee;border-radius:10px;cursor:pointer;
+}
+
+/* PRODUCTS */
+.products{padding:40px;}
+.product-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+.card{
+background:white;border-radius:10px;padding:15px;
+position:relative;transition:0.3s;
+}
+.card-img{font-size:60px;text-align:center;}
+.btn-cart{
+background:#1a1a2e;color:white;padding:8px;width:100%;
+border:none;border-radius:8px;cursor:pointer;
+}
+.wishlist{
+position:absolute;top:10px;right:10px;
+border:none;border-radius:50%;padding:5px;
+cursor:pointer;
+}
+
+/* EFFECTS */
+.wishlist.active{
+background:#e94560;color:white;
+}
+.category-card.selected{
+background:#38ef7d;
+}
+</style>
 </head>
 
 <body>
 
-<!-- ─── NAVBAR ─── -->
 <header>
-    <div class="logo">
-        <span>🛍️</span>
-        <h1>SatishShop</h1>
-    </div>
+<div class="logo"><h1>SatishShop</h1></div>
 
-    <div class="search-bar">
-        <span>🔍</span>
-        <input type="text" placeholder="Search products...">
-    </div>
+<div class="search-bar">
+<input type="text" placeholder="Search products...">
+</div>
 
-    <nav>
-        <a href="form.html">Home</a>
-        <a href="#">Products</a>
-        <a href="#">🛒 Cart (0)</a>
-        <a href="login/login.php" class="btn-login">Login</a>
-    </nav>
+<nav>
+<a href="#">Home</a>
+<a href="#">Products</a>
+<a href="#">🛒 Cart (0)</a>
+<a href="#" class="btn-login">Login</a>
+</nav>
 </header>
 
-<!-- ─── HERO ─── -->
 <section class="hero">
-    <div class="hero-content">
-        <div class="hero-badge">🔥 MEGA SALE — UP TO 60% OFF</div>
-        <h2>Shop <span>Smarter</span>,<br>Live Better</h2>
-        <p>Discover thousands of premium products at unbeatable prices. Fast delivery, easy returns, and secure payments.</p>
-        <div class="hero-buttons">
-            <a href="#" class="btn-shop">🛍️ Shop Now</a>
-            <a href="#" class="btn-explore">Explore Deals →</a>
-        </div>
-        <div class="hero-stats">
-            <div class="stat">
-                <h3>50K+</h3>
-                <p>Products</p>
-            </div>
-            <div class="stat">
-                <h3>2L+</h3>
-                <p>Customers</p>
-            </div>
-            <div class="stat">
-                <h3>4.9★</h3>
-                <p>Rating</p>
-            </div>
-        </div>
-    </div>
-    <div class="hero-emoji">🛒</div>
+<h2>Shop Smarter, Live Better</h2>
+<a href="#" class="btn-shop">Shop Now</a>
 </section>
 
-<!-- ─── CATEGORIES ─── -->
 <section class="categories">
-    <div class="section-title">
-        <h2>Shop by Category</h2>
-        <p>Find exactly what you're looking for</p>
-    </div>
-    <div class="category-grid">
-        <div class="category-card"><div class="icon">📱</div><p>Mobiles</p></div>
-        <div class="category-card"><div class="icon">👟</div><p>Footwear</p></div>
-        <div class="category-card"><div class="icon">🎧</div><p>Electronics</p></div>
-        <div class="category-card"><div class="icon">⌚</div><p>Watches</p></div>
-        <div class="category-card"><div class="icon">👗</div><p>Fashion</p></div>
-        <div class="category-card"><div class="icon">🏠</div><p>Home</p></div>
-        <div class="category-card"><div class="icon">💄</div><p>Beauty</p></div>
-        <div class="category-card"><div class="icon">🎮</div><p>Gaming</p></div>
-    </div>
+<h2>Categories</h2>
+<div class="category-grid">
+<div class="category-card">📱 Mobiles</div>
+<div class="category-card">👟 Footwear</div>
+<div class="category-card">🎧 Electronics</div>
+<div class="category-card">⌚ Watches</div>
+</div>
 </section>
 
-<!-- ─── PROMO BANNER ─── -->
-<div class="promo-banner">
-    <div>
-        <h3>🎉 New User Special Offer!</h3>
-        <p>Get flat ₹500 OFF on your first order above ₹1,499. Use code: <strong>WELCOME500</strong></p>
-    </div>
-    <a href="register/register.php" class="btn-promo">Register Now →</a>
-</div>
-
-<!-- ─── PRODUCTS ─── -->
 <section class="products">
-    <div class="products-header">
-        <h2>⭐ Featured Products</h2>
-        <a href="#" class="view-all">View All →</a>
-    </div>
+<h2>Products</h2>
 
-    <div class="product-grid">
+<div class="product-grid">
 
-        <!-- Card 1 -->
-        <div class="card">
-            <span class="badge">HOT</span>
-            <button class="wishlist">🤍</button>
-            <div class="card-img">🎧</div>
-            <div class="card-body">
-                <h3>Wireless Headphones</h3>
-                <div class="stars">★★★★★ <span>(128)</span></div>
-                <div class="price-row">
-                    <div>
-                        <span class="price">₹1,999</span>
-                        <span class="old-price">₹3,499</span>
-                    </div>
-                    <span class="discount">43% OFF</span>
-                </div>
-                <button class="btn-cart">🛒 Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card">
-            <span class="badge">NEW</span>
-            <button class="wishlist">🤍</button>
-            <div class="card-img">⌚</div>
-            <div class="card-body">
-                <h3>Smart Watch</h3>
-                <div class="stars">★★★★☆ <span>(95)</span></div>
-                <div class="price-row">
-                    <div>
-                        <span class="price">₹2,999</span>
-                        <span class="old-price">₹5,499</span>
-                    </div>
-                    <span class="discount">45% OFF</span>
-                </div>
-                <button class="btn-cart">🛒 Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card">
-            <span class="badge">SALE</span>
-            <button class="wishlist">🤍</button>
-            <div class="card-img">👟</div>
-            <div class="card-body">
-                <h3>Running Shoes</h3>
-                <div class="stars">★★★★★ <span>(210)</span></div>
-                <div class="price-row">
-                    <div>
-                        <span class="price">₹3,499</span>
-                        <span class="old-price">₹6,000</span>
-                    </div>
-                    <span class="discount">42% OFF</span>
-                </div>
-                <button class="btn-cart">🛒 Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="card">
-            <span class="badge">PREMIUM</span>
-            <button class="wishlist">🤍</button>
-            <div class="card-img">📱</div>
-            <div class="card-body">
-                <h3>iPhone</h3>
-                <div class="stars">★★★★★ <span>(512)</span></div>
-                <div class="price-row">
-                    <div>
-                        <span class="price">₹1,12,299</span>
-                        <span class="old-price">₹1,29,999</span>
-                    </div>
-                    <span class="discount">14% OFF</span>
-                </div>
-                <button class="btn-cart">🛒 Add to Cart</button>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- ─── FEATURES BAR ─── -->
-<div class="features-bar">
-    <div class="feature-item">
-        <div class="icon">🚚</div>
-        <div>
-            <h4>Free Delivery</h4>
-            <p>On orders above ₹499</p>
-        </div>
-    </div>
-    <div class="feature-item">
-        <div class="icon">🔒</div>
-        <div>
-            <h4>Secure Payment</h4>
-            <p>100% safe transactions</p>
-        </div>
-    </div>
-    <div class="feature-item">
-        <div class="icon">↩️</div>
-        <div>
-            <h4>Easy Returns</h4>
-            <p>7-day hassle-free returns</p>
-        </div>
-    </div>
-    <div class="feature-item">
-        <div class="icon">🎧</div>
-        <div>
-            <h4>24/7 Support</h4>
-            <p>Always here to help</p>
-        </div>
-    </div>
-    <div class="feature-item">
-        <div class="icon">⭐</div>
-        <div>
-            <h4>Top Rated</h4>
-            <p>Trusted by 2L+ customers</p>
-        </div>
-    </div>
+<div class="card">
+<button class="wishlist">🤍</button>
+<div class="card-img">🎧</div>
+<h3>Headphones</h3>
+<button class="btn-cart">Add to Cart</button>
 </div>
 
-<!-- ─── FOOTER ─── -->
-<footer>
-    <div class="footer-grid">
-        <div class="footer-col">
-            <h4>🛍️ SATISH SHOP</h4>
-            <p>Your ultimate online shopping destination. Quality products, great prices, fast delivery.</p>
-        </div>
-        <div class="footer-col">
-            <h4>QUICK LINKS</h4>
-            <a href="#">Home</a>
-            <a href="#">Products</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact</a>
-        </div>
-        <div class="footer-col">
-            <h4>CUSTOMER CARE</h4>
-            <a href="#">Track Order</a>
-            <a href="#">Returns & Refunds</a>
-            <a href="#">FAQs</a>
-            <a href="#">Support</a>
-        </div>
-        <div class="footer-col">
-            <h4>CONTACT</h4>
-            <a href="#">📧 satish@shop.com</a>
-            <a href="#">📞 +91 98765 43210</a>
-            <a href="#">📍 Vijayawada, AP</a>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="footer-logo">SatishShop</div>
-        <p>© 2025 SatishShop. All rights reserved.</p>
-        <div class="payment-icons">💳 🏦 📱 💰</div>
-    </div>
-</footer>
+<div class="card">
+<button class="wishlist">🤍</button>
+<div class="card-img">⌚</div>
+<h3>Smart Watch</h3>
+<button class="btn-cart">Add to Cart</button>
+</div>
+
+<div class="card">
+<button class="wishlist">🤍</button>
+<div class="card-img">👟</div>
+<h3>Shoes</h3>
+<button class="btn-cart">Add to Cart</button>
+</div>
+
+<div class="card">
+<button class="wishlist">🤍</button>
+<div class="card-img">📱</div>
+<h3>iPhone</h3>
+<button class="btn-cart">Add to Cart</button>
+</div>
+
+</div>
+</section>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function(){
+
+// Add to Cart
+let count = 0;
+$(".btn-cart").click(function(){
+    let product = $(this).siblings("h3").text();
+    alert(product + " added to cart!");
+
+    count++;
+    $("nav a:contains('Cart')").text("🛒 Cart ("+count+")");
+});
+
+// Wishlist
+$(".wishlist").click(function(){
+    $(this).toggleClass("active");
+
+    if($(this).hasClass("active")){
+        $(this).text("❤️");
+    }else{
+        $(this).text("🤍");
+    }
+});
+
+// Search
+$(".search-bar input").keyup(function(){
+    let value = $(this).val().toLowerCase();
+
+    $(".card").filter(function(){
+        $(this).toggle(
+            $(this).find("h3").text().toLowerCase().indexOf(value) > -1
+        );
+    });
+});
+
+// Category click
+$(".category-card").click(function(){
+    $(".category-card").removeClass("selected");
+    $(this).addClass("selected");
+
+    alert("Selected: " + $(this).text());
+});
+
+// Smooth scroll
+$(".btn-shop").click(function(e){
+    e.preventDefault();
+
+    $('html, body').animate({
+        scrollTop: $(".products").offset().top
+    },800);
+});
+
+// Hover animation
+$(".card").hover(
+function(){ $(this).css("transform","scale(1.05)"); },
+function(){ $(this).css("transform","scale(1)"); }
+);
+
+});
+</script>
 
 </body>
 </html>
